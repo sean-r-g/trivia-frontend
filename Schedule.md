@@ -7,3 +7,6 @@
 * Timer up and running
 * Random question generator up and running
 * Points adding to user score upon correct answer
+
+## Day 2
+* React nav bar added and functioning

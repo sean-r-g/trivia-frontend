@@ -1,6 +1,7 @@
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+
 const TopNavBar = () => {
 
     return (
@@ -21,7 +22,7 @@ const TopNavBar = () => {
             </NavDropdown>
             </Nav>
             <Nav>
-            <Nav.Link>Log In</Nav.Link>
+            <Nav.Link></Nav.Link>
             {/* <Nav.Link eventKey={2} href="#memes">
                 Dank memes
             </Nav.Link> */}
