@@ -1,8 +1,7 @@
 import './App.css';
 import axios from 'axios'
 import React, {useState, useEffect} from 'react'
-import Timer from './components/timer'
-import UrgeWithPleasureComponent from './components/yarntimer';
+import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 
 
 function App() {
@@ -12,6 +11,8 @@ function App() {
   const [showAnswer, setShowAnswer] = useState(false)
   const [checkedAnswer, setCheckedAnswer] = useState(false)
   const [userScore, setUserScore] = useState(0)
+  const [key, setKey] = useState(0)
+  const [showTimer, setShowTimer] = useState(false)
 
   const currentUrl = 'http://localhost:3000/trivia/'
 
@@ -28,6 +29,8 @@ function App() {
   }
 
   const handleRandom = () => {
+    setShowTimer(true)
+    setKey(prevKey => prevKey + 1)
     setShowAnswer(false)
     setUserAnswer('')
     randomSelection()
@@ -40,10 +43,14 @@ function App() {
   const handleUserAnswer = (event) => {
     setUserAnswer(event.target.value)
   }
-
+  const handleTimerDone = () => {
+    setShowAnswer(true)
+    setShowTimer(false)
+  }
 
   const checkAnswer = (event, question) => {
     setShowAnswer(true)
+    setShowTimer(false)
     event.preventDefault()
     if (userAnswer.toLowerCase() == question.answer.toLowerCase()) {
       setCheckedAnswer(true)
@@ -53,39 +60,53 @@ function App() {
     }
   }
 
-  useEffect(()=>{
-    getQuestions()
-  },[])
+  const UrgeWithPleasureComponent = (key, props) => (
+    
+    <CountdownCircleTimer
+      key={key}
+      isPlaying
+      duration={35}
+      colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+      colorsTime={[25, 15, 10, 5]}
+      onComplete={handleTimerDone}
+    >
+      {({ remainingTime }) => remainingTime}
+    </CountdownCircleTimer>
+  )
+
+
+  // useEffect(()=>{
+  //   getQuestions()
+  // },[])
 
 
 
 
   return (
     <>
-    <h1>Hello World!</h1>
-    <h2>Score: {userScore}</h2>
-    {/* <Timer/> */}
-    {showAnswer ? <UrgeWithPleasureComponent/> : null}
+    <h1>Trivia Time!</h1>
+    <h2 id='score'>Score: {userScore}</h2>
     <button onClick={() => {handleRandom(); setShowAll(true)}}>Generate Question</button>
-    {showAll ? <div>
+    {showAll ? <div className='questions-cont'>
       {questions.map((question)=> {
         return (
-          <div key={question.id}>
-            <h4>Category: {question.category}</h4>
-            <h4>Question: {question.question}</h4>
+          <div className='question-card'key={question.id}>
+            <h3>Category: {question.category}</h3>
+            <h2>{question.question}</h2>
             <h5>Answer: {question.answer}</h5>
-            <h4>{question.image}</h4>
+            <img src={question.image}/>
             <form onSubmit={(event) => {checkAnswer(event, question)}}>
               <label> Answer: 
                 <input type='text' name='useranswer' value={userAnswer} onChange={handleUserAnswer}></input>
                 <input type='submit' value='Submit'/>
               </label>
             </form>
-            {showAnswer ? checkedAnswer ? <h1>Correct!</h1> : <h1>Wrong! The correct answer is {question.answer}</h1> : null}
+            {showAnswer ? checkedAnswer ? <h1>Correct!</h1> : <h1>*Bzzzzzzz* The correct answer is {question.answer}</h1> : null}
           </div>
         )
       })}
     </div> : null}
+    {showTimer ? <div id='timer-div'><UrgeWithPleasureComponent key={key}/></div> : null}
     </>
   );
 }
