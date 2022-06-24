@@ -8,15 +8,16 @@ import Login from './components/Login';
 
 
 function App() {
-  
+  const [user, setUser] = useState()
+  const [loggedIn, setLoggedIn] = useState(false)
  
 
   return (
     <>
     <TopNavBar/>
-    <Login/>
+    <Login user={user} setUser={setUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
     <h1>Trivia Time!</h1>
-    <SoloPlay/>
+    <SoloPlay user={user}/>
     </>
   );
 }

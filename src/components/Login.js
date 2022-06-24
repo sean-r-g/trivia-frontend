@@ -1,29 +1,29 @@
 import {Modal, Button} from 'react-bootstrap'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import axios from 'axios';
 import authServices from './authservices'
 
-const Login = (props) => {
+const Login = ({user, setUser, loggedIn, setLoggedIn}) => {
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [loggedIn, setLoggedIn] = useState(false)
     const [showLogin, setShowLogin] = useState(true)
     const [signedUp, setSignedUp] = useState(false)
-    const [users, setUsers] = useState()
-    const [user, setUser] = useState()
+    
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const getUser = () => {
+    const getUsers = () => {
         axios.get('http://localhost:3000/users').then((response)=>{
             setUser(response.data)
         })
     }
+    useEffect(()=> {
+        getUsers()
+    }, [])
     const handleSetUser = () => {
-        getUser()
-        setUser(user.filter(user=> user.email == email))
+        setUser(user.filter(user => user.email == email))
     }
 
     const handleLogin = async (e) => {

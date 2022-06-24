@@ -4,7 +4,7 @@ import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 import Fade from 'react-bootstrap/Fade'
 import loggedIn from './Login'
 
-const SoloPlay = (props) => {
+const SoloPlay = ({user}) => {
   const [questions, setQuestions] = useState([])
   const [showAll, setShowAll] = useState(false)
   const [userAnswer, setUserAnswer] = useState()
