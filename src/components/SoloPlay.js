@@ -4,7 +4,7 @@ import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 import Fade from 'react-bootstrap/Fade'
 import loggedIn from './Login'
 
-const SoloPlay = ({user}) => {
+const SoloPlay = ({user}, {loggedIn}) => {
   const [questions, setQuestions] = useState([])
   const [showAll, setShowAll] = useState(false)
   const [userAnswer, setUserAnswer] = useState()
@@ -57,7 +57,7 @@ const SoloPlay = ({user}) => {
       setCheckedAnswer(true)
       setUserScore(userScore + 100)
       if (loggedIn == true) {
-        axios.put('http://localhost:3000/')
+        axios.put(`http://localhost:3000/${user[0].id}`)
       }
     } else {
       setCheckedAnswer(false)
