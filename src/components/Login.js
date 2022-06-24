@@ -3,9 +3,9 @@ import {useEffect, useState} from 'react'
 import axios from 'axios';
 import authServices from './authservices'
 
-const Login = ({user, setUser, loggedIn, setLoggedIn, getUserId, userId}) => {
+const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail}) => {
     const [show, setShow] = useState(false);
-    const [email, setEmail] = useState('')
+    
     const [password, setPassword] = useState('')
     const [showLogin, setShowLogin] = useState(true)
     const [signedUp, setSignedUp] = useState(false)
@@ -13,6 +13,7 @@ const Login = ({user, setUser, loggedIn, setLoggedIn, getUserId, userId}) => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
 
     const getUsers = () => {
         axios.get('http://localhost:3000/users').then((response)=>{
@@ -33,8 +34,6 @@ const Login = ({user, setUser, loggedIn, setLoggedIn, getUserId, userId}) => {
             setLoggedIn(true)
             setSignedUp(false)
             handleSetUser()
-            getUserId()
-            console.log(userId);
             console.log('Successfully logged in');
         } catch (err) {
             console.log(err);

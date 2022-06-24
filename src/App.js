@@ -10,20 +10,16 @@ import Login from './components/Login';
 function App() {
   const [user, setUser] = useState()
   const [loggedIn, setLoggedIn] = useState(false)
+  const [email, setEmail] = useState('')
  
-let userId = null
-const getUserId = () => {
-    user.map((user)=>{
-    userId = user.id
-  })
-}
+
 
   return (
     <>
     <TopNavBar/>
-    <Login user={user} setUser={setUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} getUserId={getUserId} userId={userId}/>
+    <Login user={user} setUser={setUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail}/>
     <h1>Trivia Time!</h1>
-    <SoloPlay user={user}/>
+    <SoloPlay user={user} loggedin={loggedIn} email={email}/>
     </>
   );
 }

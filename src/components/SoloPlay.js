@@ -4,7 +4,7 @@ import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 import Fade from 'react-bootstrap/Fade'
 
 
-const SoloPlay = ({user}, {loggedIn}) => {
+const SoloPlay = ({user, loggedIn, email}) => {
   const [questions, setQuestions] = useState([])
   const [showAll, setShowAll] = useState(false)
   const [userAnswer, setUserAnswer] = useState()
@@ -68,10 +68,12 @@ const SoloPlay = ({user}, {loggedIn}) => {
     }
   }
 
+  let userEmail = email
 
-
-  const handleSaveScore = () => {
-    axios.put('http://localhost:3000/users/update')
+  const handleSaveScore = (email, score) => {
+    score = userScore
+    email = userEmail
+    axios.put(`http://localhost:3000/users/update`, {email, score})
   }
 
   const UrgeWithPleasureComponent = (key, props) => (
@@ -118,7 +120,7 @@ const SoloPlay = ({user}, {loggedIn}) => {
       })}
     </div> : null}
     {showTimer ? <div id='timer-div'><UrgeWithPleasureComponent key={key}/></div> : null}
-    <button onClick={handleSaveScore}>Save Score</button>
+    <button onClick={handleSaveScore} >Save Score</button>
     </>
   );
 }
