@@ -8,25 +8,13 @@ import Login from './components/Login';
 
 
 function App() {
-  // const [token, setToken] = useState()
-
-  function setToken(userToken) {
-    localStorage.setItem('token', JSON.stringify(userToken))
-  }
   
-  const token = getToken()
-
-  function getToken() {
-    const tokenString = localStorage.getItem('token')
-    const userToken = JSON.parse(tokenString)
-    return userToken?.token
-  }
  
 
   return (
     <>
-    <TopNavBar />
-    <Login setToken={setToken}/>
+    <TopNavBar/>
+    <Login/>
     <h1>Trivia Time!</h1>
     <SoloPlay/>
     </>

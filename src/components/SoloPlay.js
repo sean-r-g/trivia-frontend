@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, {useState, useEffect} from 'react'
 import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 import Fade from 'react-bootstrap/Fade'
+import loggedIn from './Login'
 
 const SoloPlay = (props) => {
   const [questions, setQuestions] = useState([])
@@ -55,6 +56,9 @@ const SoloPlay = (props) => {
     if (userAnswer.toLowerCase() == question.answer.toLowerCase()) {
       setCheckedAnswer(true)
       setUserScore(userScore + 100)
+      if (loggedIn == true) {
+        axios.put('http://localhost:3000/')
+      }
     } else {
       setCheckedAnswer(false)
     }

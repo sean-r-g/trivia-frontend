@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-    const currentURL = 'http://localhost:3000/auth'
+    const currentURL = 'http://localhost:3000/users'
 
     const signup = (email, password) => {
         return axios.post(`${currentURL}/signup`, {email, password})
