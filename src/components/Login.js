@@ -51,6 +51,7 @@ const Login = ({user, setUser, loggedIn, setLoggedIn}) => {
     }
     const handleLogout = () => {
         localStorage.removeItem('user')
+        localStorage.removeItem('userscore')
         setLoggedIn(false)
         setEmail('')
         setPassword('')

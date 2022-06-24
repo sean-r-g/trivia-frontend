@@ -23,6 +23,8 @@ const SoloPlay = ({user}, {loggedIn}) => {
     })
   }
 
+  localStorage.setItem('userscore', userScore)
+
   let randomid = null
   const randomSelection = () => {
     randomid = Math.floor(Math.random() * 698)
@@ -56,9 +58,10 @@ const SoloPlay = ({user}, {loggedIn}) => {
     if (userAnswer.toLowerCase() == question.answer.toLowerCase()) {
       setCheckedAnswer(true)
       setUserScore(userScore + 100)
-      if (loggedIn) {
-        console.log("trying to add score...");
-        axios.put(`http://localhost:3000/update`)
+      if (localStorage.getItem('user') !== '') {
+      //   // console.log("trying to add score...");
+      //   // axios.put(`http://localhost:3000/update`)
+        localStorage.setItem('userscore', userScore)
       }
     } else {
       setCheckedAnswer(false)
