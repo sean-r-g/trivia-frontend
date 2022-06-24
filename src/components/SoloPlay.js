@@ -56,8 +56,9 @@ const SoloPlay = ({user}, {loggedIn}) => {
     if (userAnswer.toLowerCase() == question.answer.toLowerCase()) {
       setCheckedAnswer(true)
       setUserScore(userScore + 100)
-      if (loggedIn == true) {
-        axios.put(`http://localhost:3000/${user[0].id}`)
+      if (loggedIn) {
+        console.log("trying to add score...");
+        axios.put(`http://localhost:3000/update`)
       }
     } else {
       setCheckedAnswer(false)
