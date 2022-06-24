@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 import Fade from 'react-bootstrap/Fade'
 
+
 const SoloPlay = ({user}, {loggedIn}) => {
   const [questions, setQuestions] = useState([])
   const [showAll, setShowAll] = useState(false)
@@ -67,10 +68,10 @@ const SoloPlay = ({user}, {loggedIn}) => {
     }
   }
 
+
+
   const handleSaveScore = () => {
-    // axios.put('http://localhost:3000/users/update')
-    let unparsed = JSON.parse(localStorage.getItem('user'))
-    console.log(unparsed);
+    axios.put('http://localhost:3000/users/update')
   }
 
   const UrgeWithPleasureComponent = (key, props) => (

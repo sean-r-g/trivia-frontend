@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react'
 import axios from 'axios';
 import authServices from './authservices'
 
-const Login = ({user, setUser, loggedIn, setLoggedIn}) => {
+const Login = ({user, setUser, loggedIn, setLoggedIn, getUserId, userId}) => {
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -33,6 +33,8 @@ const Login = ({user, setUser, loggedIn, setLoggedIn}) => {
             setLoggedIn(true)
             setSignedUp(false)
             handleSetUser()
+            getUserId()
+            console.log(userId);
             console.log('Successfully logged in');
         } catch (err) {
             console.log(err);
