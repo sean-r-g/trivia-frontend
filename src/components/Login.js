@@ -3,16 +3,11 @@ import {useEffect, useState} from 'react'
 import axios from 'axios';
 import authServices from './authservices'
 
-const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail}) => {
-    const [show, setShow] = useState(false);
-    
+const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail, show, setShow, handleClose, handleShow}) => {
     const [password, setPassword] = useState('')
     const [showLogin, setShowLogin] = useState(true)
     const [signedUp, setSignedUp] = useState(false)
-    
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
 
     const getUsers = () => {
@@ -64,9 +59,9 @@ const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail}) => {
 
     return (
         <>
-          <button id='loginmodal' variant="primary" onClick={handleShow}>
+          <p id='loginmodal' variant="primary" onClick={handleShow}>
             Log In
-          </button>
+          </p>
     
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -75,7 +70,7 @@ const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail}) => {
             <Modal.Body id='modalbody'>
             {loggedIn ? <h3>Logged in as: {email}</h3> : null }
             {signedUp ? <h3>Successfully signed up! Please log in to continue</h3> : null}
-            {showLogin ? <form onSubmit={handleLogin}>
+            {!loggedIn ? showLogin ? <form onSubmit={handleLogin}>
                 <label>
                     <p>Email</p>
                     <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
@@ -104,9 +99,9 @@ const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail}) => {
                 <br/>
                     <button type="submit">Create Account</button>
                 </div>
-            </form> }
+            </form> : null}
             <br/>
-            {showLogin ? <button onClick={toggleLoginSignup}>Sign Up</button> : <button onClick={toggleLoginSignup}>Log In</button>}
+            {!loggedIn ? showLogin ? <button onClick={toggleLoginSignup}>Sign Up</button> : <button onClick={toggleLoginSignup}>Log In</button> : null}
             <br/>
             <br/>
             {loggedIn ? <button onClick={handleLogout}>Log Out</button> : null}

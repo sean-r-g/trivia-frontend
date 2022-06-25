@@ -4,7 +4,7 @@ import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 import Fade from 'react-bootstrap/Fade'
 
 
-const SoloPlay = ({user, loggedIn, email}) => {
+const SoloPlay = ({props, loggedIn, email}) => {
   const [questions, setQuestions] = useState([])
   const [showAll, setShowAll] = useState(false)
   const [userAnswer, setUserAnswer] = useState()
@@ -14,57 +14,60 @@ const SoloPlay = ({user, loggedIn, email}) => {
   const [key, setKey] = useState(0)
   const [showTimer, setShowTimer] = useState(false)
   const [open, setOpen] = useState(false)
+  const [rounds, setRounds ] = useState(10)
 
   const currentUrl = 'http://localhost:3000/trivia/'
 
-  const getQuestions = () => {
-    axios.get(currentUrl).then((response)=>{
-      setQuestions(response.data)
-    })
-  }
-
-  localStorage.setItem('userscore', userScore)
 
   let randomid = null
   const randomSelection = () => {
     randomid = Math.floor(Math.random() * 698)
     return randomid
   }
-
+  const handleUserAnswer = (event) => {
+    event.preventDefault()
+    setUserAnswer(event.target.value)
+  }
   const handleRandom = () => {
     setShowTimer(true)
     setKey(prevKey => prevKey + 1)
     setShowAnswer(false)
-    setUserAnswer('')
     randomSelection()
       axios.get(currentUrl + randomid).then((response)=>{
-        console.log(randomid);
         setQuestions(response.data)
       })
+    setUserAnswer('')
     }
   
-  const handleUserAnswer = (event) => {
-    setUserAnswer(event.target.value)
+  const startGame = () => {
+    setUserScore(0)
+    setRounds(10)
+    handleRandom()
+    setShowAll(true)
+    setOpen(true)
   }
+  
   const handleTimerDone = () => {
     setShowAnswer(true)
     setShowTimer(false)
   }
 
   const checkAnswer = (event, question) => {
-    setShowAnswer(true)
+    setRounds(rounds - 1)
     setShowTimer(false)
     event.preventDefault()
-    if (userAnswer.toLowerCase() == question.answer.toLowerCase()) {
-      setCheckedAnswer(true)
-      setUserScore(userScore + 100)
-      if (localStorage.getItem('user') !== '') {
-      //   // console.log("trying to add score...");
-      //   // axios.put(`http://localhost:3000/update`)
-        localStorage.setItem('userscore', userScore)
+      if (userAnswer.toLowerCase() == question.answer.toLowerCase()) {
+        setShowAnswer(true)
+        setCheckedAnswer(true)
+        setUserScore(userScore + 100)
+      } else {
+        setShowAnswer(true)
+        setCheckedAnswer(false)
       }
-    } else {
-      setCheckedAnswer(false)
+      handleRandom()
+     if (rounds == 1) {
+      alert(`Game Over! Final score: ${userScore}`)
+      setRounds(10)
     }
   }
 
@@ -94,10 +97,11 @@ const SoloPlay = ({user, loggedIn, email}) => {
 
 
   return (
-    <>
+    <div className='main-div'>
     <h1>Solo Play!</h1>
     <h2 id='score'>Score: {userScore}</h2>
-    <button className='question-generator' onClick={() => {handleRandom(); setShowAll(true); setOpen(true)}} aria-controls='question-card' aria-expanded={open}>Generate Question</button>
+    <h4 id='round'>Round {rounds} of 10</h4>
+    <button className='question-generator' onClick={startGame} aria-controls='question-card' aria-expanded={open}>Start Game</button>
     {showAll ? <div className='questions-cont'>
       {questions.map((question)=> {
         return (
@@ -120,8 +124,8 @@ const SoloPlay = ({user, loggedIn, email}) => {
       })}
     </div> : null}
     {showTimer ? <div id='timer-div'><UrgeWithPleasureComponent key={key}/></div> : null}
-    <button onClick={handleSaveScore} >Save Score</button>
-    </>
+    {loggedIn ? <button onClick={handleSaveScore} >Save Score</button> : null}
+    </div>
   );
 }
 

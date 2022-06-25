@@ -1,8 +1,9 @@
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import {useState} from 'react'
 
+const TopNavBar = ({email, loggedIn, handleShow}) => {
 
-const TopNavBar = () => {
 
     return (
         <Navbar id='navbar'fixed='top' collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -13,6 +14,7 @@ const TopNavBar = () => {
             <Nav className="me-auto">
             <Nav.Link>Solo Play</Nav.Link>
             <Nav.Link>Ranked Play</Nav.Link>
+            <Nav.Link>Placeholder</Nav.Link>
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item>Action</NavDropdown.Item>
                 <NavDropdown.Item>Another action</NavDropdown.Item>
@@ -22,10 +24,10 @@ const TopNavBar = () => {
             </NavDropdown>
             </Nav>
             <Nav>
-            <Nav.Link></Nav.Link>
-            {/* <Nav.Link eventKey={2} href="#memes">
-                Dank memes
-            </Nav.Link> */}
+            {loggedIn ? <Nav.Link eventKey={2}>
+                Welcome {email}!
+            </Nav.Link> : null}
+            {!loggedIn ? <Nav.Link onClick={handleShow}>Login</Nav.Link> : <Nav.Link onClick={handleShow}>Log Out</Nav.Link>}
             </Nav>
         </Navbar.Collapse>
         </Container>

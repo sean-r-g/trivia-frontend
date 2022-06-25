@@ -11,15 +11,19 @@ function App() {
   const [user, setUser] = useState()
   const [loggedIn, setLoggedIn] = useState(false)
   const [email, setEmail] = useState('')
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
  
 
 
   return (
     <>
-    <TopNavBar/>
-    <Login user={user} setUser={setUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail}/>
-    <h1>Trivia Time!</h1>
-    <SoloPlay user={user} loggedin={loggedIn} email={email}/>
+    <TopNavBar email={email} loggedIn={loggedIn} setEmail={setEmail} setUser={setUser} user={user} handleShow={handleShow}/>
+    <div id='hidelogin'>
+    <Login user={user} setUser={setUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail} handleShow={handleShow} handleClose={handleClose} show={show} setShow={setShow}/>
+    </div>
+    <SoloPlay user={user} loggedIn={loggedIn} email={email}/>
     </>
   );
 }
