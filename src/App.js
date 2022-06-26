@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react'
 import SoloPlay from './components/SoloPlay';
 import TopNavBar from './components/NavBar';
 import Login from './components/Login';
+import UserScores from './components/UserScores'
 
 
 
@@ -24,6 +25,7 @@ function App() {
     <Login user={user} setUser={setUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail} handleShow={handleShow} handleClose={handleClose} show={show} setShow={setShow}/>
     </div>
     <SoloPlay user={user} loggedIn={loggedIn} email={email}/>
+    {loggedIn ? <UserScores user={user} loggedIn={loggedIn}/> : null}
     </>
   );
 }

@@ -15,13 +15,13 @@ const TopNavBar = ({email, loggedIn, handleShow}) => {
             <Nav.Link>Solo Play</Nav.Link>
             <Nav.Link>Ranked Play</Nav.Link>
             <Nav.Link>Placeholder</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+            {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item>Action</NavDropdown.Item>
                 <NavDropdown.Item>Another action</NavDropdown.Item>
                 <NavDropdown.Item>Something</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item>Separated link</NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
             </Nav>
             <Nav>
             {loggedIn ? <Nav.Link eventKey={2}>
