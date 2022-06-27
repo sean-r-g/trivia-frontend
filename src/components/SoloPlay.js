@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, {useState, useEffect, useRef} from 'react'
-import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 import Fade from 'react-bootstrap/Fade'
+import Timer from './timer'
 
 
 const SoloPlay = ({props, loggedIn, email}) => {
@@ -16,11 +16,10 @@ const SoloPlay = ({props, loggedIn, email}) => {
   const [open, setOpen] = useState(false)
   const [rounds, setRounds ] = useState(10)
   const [gameOn, setGameOn] = useState(false)
-  const answerRef = useRef(null)
-
+  const [showForm, setShowForm] = useState(false)
 
   const currentUrl = 'http://localhost:3000/trivia/'
-
+  
 
   let randomid = null
   const randomSelection = () => {
@@ -33,16 +32,25 @@ const SoloPlay = ({props, loggedIn, email}) => {
     setUserAnswer(event.target.value)
   }
 
+
   const handleRandom = () => {
+    setShowForm(true)
     setShowTimer(true)
     setKey(prevKey => prevKey + 1)
     setShowAnswer(false)
+    setCheckedAnswer(false)
     randomSelection()
       axios.get(currentUrl + randomid).then((response)=>{
         setQuestions(response.data)
       })
     setUserAnswer('')
+    if (rounds == 1) {
+      alert(`Game Over! Final score: ${userScore}`)
+      setRounds(10)
+      setGameOn(false)
+      setShowTimer(false)
     }
+  }
   
   const startGame = () => {
     setGameOn(true)
@@ -56,10 +64,15 @@ const SoloPlay = ({props, loggedIn, email}) => {
   const handleTimerDone = () => {
     setShowAnswer(true)
     setShowTimer(false)
+    if (rounds == 1) {
+      alert(`Game Over! Final score: ${userScore}`)
+      setRounds(10)
+      setGameOn(false)
   }
+}
 
   const checkAnswer = (event, question) => {
-    setRounds(rounds - 1)
+    setShowForm(false)
     setShowTimer(false)
     event.preventDefault()
       if (userAnswer.toLowerCase() == question.answer.toLowerCase()) {
@@ -70,13 +83,16 @@ const SoloPlay = ({props, loggedIn, email}) => {
         setShowAnswer(true)
         setCheckedAnswer(false)
       }
-      // handleRandom()
      if (rounds == 1) {
       alert(`Game Over! Final score: ${userScore}`)
       setRounds(10)
       setGameOn(false)
+      if (loggedIn == true) {
+        handleSaveScore()
+      }
     }
   }
+
 
   let userEmail = email
 
@@ -87,30 +103,14 @@ const SoloPlay = ({props, loggedIn, email}) => {
   }
 
 
-  const UrgeWithPleasureComponent = (key, props) => (
-    
-    <CountdownCircleTimer
-      key={key}
-      isPlaying
-      duration={25}
-      colors={['#004777', '#F7B801', '#A30000', '#A30000']}
-      colorsTime={[20, 15, 10, 5]}
-      onComplete={handleTimerDone}
-    >
-      {({ remainingTime }) => remainingTime}
-    </CountdownCircleTimer>
-  )
-
-
-
 
   return (
     <div className='main-div'>
     <h1>Solo Play!</h1>
     <h2 id='score'>Score: {userScore}</h2>
     <h4 id='round'>Round {rounds} of 10</h4>
-    {!gameOn ? <button className='question-generator' onClick={startGame} aria-controls='question-card' aria-expanded={open}>Start Game</button> : <button className='question-generator' onClick={() => {handleRandom()}}>Next Question</button>}
-    {showAll ? <div className='questions-cont'>
+    {showTimer ? <div id='timer-div'><Timer handleTimerDone={handleTimerDone}/></div> : null}
+    {gameOn ? showAll ? <div className='questions-cont'>
       {questions.map((question)=> {
         return (
         <Fade in={open}>
@@ -119,19 +119,19 @@ const SoloPlay = ({props, loggedIn, email}) => {
             <h2>{question.question}</h2>
             <h5>Answer: {question.answer}</h5>
             <img src={question.image}/>
-            <form onSubmit={(event) => {checkAnswer(event, question)}}>
+            {showForm ? <form onSubmit={(event) => {checkAnswer(event, question)}}>
               <label> Answer: 
                 <input type='text' name='useranswer' value={userAnswer} onChange={handleUserAnswer}></input>
                 <input type='submit' value='Submit'/>
               </label>
-            </form>
+            </form> : <h4>Your answer: {userAnswer}</h4>}
             {showAnswer ? checkedAnswer ? <h1>Correct!</h1> : <h1>*Bzzzzzzz* The correct answer is {question.answer}</h1> : null}
           </div>
           </Fade>
         )
       })}
-    </div> : null}
-    {showTimer ? <div id='timer-div'><UrgeWithPleasureComponent key={key}/></div> : null}
+    </div> : null : null}
+    {!gameOn ? <button className='question-generator' onClick={() => {startGame()}} aria-controls='question-card' aria-expanded={open}>Start Game</button> : <button className='question-generator' onClick={() => {handleRandom(); setRounds(rounds - 1)}}>Next Question</button>}
     {loggedIn ? <button onClick={handleSaveScore} >Save Score</button> : null}
     </div>
   );

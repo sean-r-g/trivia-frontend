@@ -8,7 +8,7 @@ const TopNavBar = ({email, loggedIn, handleShow}) => {
     return (
         <Navbar id='navbar'fixed='top' collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-        <Navbar.Brand>Trivia Time</Navbar.Brand>
+        <Navbar.Brand><img id='logo' src='https://i.imgur.com/OCNCN6R.png'/></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
