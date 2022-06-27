@@ -1,8 +1,9 @@
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {useState} from 'react'
+import UserScores from './UserScores'
 
-const TopNavBar = ({email, loggedIn, handleShow}) => {
+const TopNavBar = ({email, loggedIn, handleShow, handleShowScores}) => {
 
 
     return (
@@ -14,7 +15,7 @@ const TopNavBar = ({email, loggedIn, handleShow}) => {
             <Nav className="me-auto">
             <Nav.Link>Solo Play</Nav.Link>
             <Nav.Link>Ranked Play</Nav.Link>
-            <Nav.Link>Placeholder</Nav.Link>
+            <Nav.Link onClick={handleShowScores}>My Scores</Nav.Link>
             {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item>Action</NavDropdown.Item>
                 <NavDropdown.Item>Another action</NavDropdown.Item>

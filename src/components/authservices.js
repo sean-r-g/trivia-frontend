@@ -23,17 +23,17 @@ import axios from 'axios'
     const logout = () => {
         localStorage.removeItem('user')
     }
-    const user = () => {
-        return JSON.parse(localStorage.getItem('user'))
+    const getCurrentUser = () => {
+        return JSON.parse(localStorage.getItem("user"))
     }
 
-    const authHeader = () => {
-        if (user && user.accessToken) {
-            return {'x-auth-token' : user.accessToken}
-        } else {
-            return {}
-        }
-    } 
-    const authServices = {signup, login, logout, user, authHeader}
+    // const authHeader = () => {
+    //     if (user && user.accessToken) {
+    //         return {'x-auth-token' : user.accessToken}
+    //     } else {
+    //         return {}
+    //     }
+    // } 
+    const authServices = {signup, login, logout, getCurrentUser}
 
 export default authServices

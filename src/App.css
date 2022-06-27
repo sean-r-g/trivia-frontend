@@ -36,3 +36,12 @@ h1 {
 .main-div {
   margin-top: 80px;
 }
+.user-scores {
+  text-align: center;
+  margin-top: 50px;
+  background-color: aquamarine;
+  width: fit-content;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

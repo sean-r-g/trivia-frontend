@@ -5,6 +5,7 @@ import SoloPlay from './components/SoloPlay';
 import TopNavBar from './components/NavBar';
 import Login from './components/Login';
 import UserScores from './components/UserScores'
+import authServices from './components/authservices';
 
 
 
@@ -15,8 +16,15 @@ function App() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
- 
 
+  
+ 
+  useEffect(()=>{
+    const currentUser = authServices.getCurrentUser()
+    if (currentUser) {
+      setUser(currentUser)
+    }
+  }, [])
 
   return (
     <>
