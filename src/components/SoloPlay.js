@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 import Fade from 'react-bootstrap/Fade'
 
@@ -15,6 +15,9 @@ const SoloPlay = ({props, loggedIn, email}) => {
   const [showTimer, setShowTimer] = useState(false)
   const [open, setOpen] = useState(false)
   const [rounds, setRounds ] = useState(10)
+  const [gameOn, setGameOn] = useState(false)
+  const answerRef = useRef(null)
+
 
   const currentUrl = 'http://localhost:3000/trivia/'
 
@@ -24,10 +27,12 @@ const SoloPlay = ({props, loggedIn, email}) => {
     randomid = Math.floor(Math.random() * 698)
     return randomid
   }
+
   const handleUserAnswer = (event) => {
     event.preventDefault()
     setUserAnswer(event.target.value)
   }
+
   const handleRandom = () => {
     setShowTimer(true)
     setKey(prevKey => prevKey + 1)
@@ -40,6 +45,7 @@ const SoloPlay = ({props, loggedIn, email}) => {
     }
   
   const startGame = () => {
+    setGameOn(true)
     setUserScore(0)
     setRounds(10)
     handleRandom()
@@ -64,10 +70,11 @@ const SoloPlay = ({props, loggedIn, email}) => {
         setShowAnswer(true)
         setCheckedAnswer(false)
       }
-      handleRandom()
+      // handleRandom()
      if (rounds == 1) {
       alert(`Game Over! Final score: ${userScore}`)
       setRounds(10)
+      setGameOn(false)
     }
   }
 
@@ -79,14 +86,15 @@ const SoloPlay = ({props, loggedIn, email}) => {
     axios.put(`http://localhost:3000/users/update`, {email, score})
   }
 
+
   const UrgeWithPleasureComponent = (key, props) => (
     
     <CountdownCircleTimer
       key={key}
       isPlaying
-      duration={35}
+      duration={25}
       colors={['#004777', '#F7B801', '#A30000', '#A30000']}
-      colorsTime={[25, 15, 10, 5]}
+      colorsTime={[20, 15, 10, 5]}
       onComplete={handleTimerDone}
     >
       {({ remainingTime }) => remainingTime}
@@ -101,12 +109,12 @@ const SoloPlay = ({props, loggedIn, email}) => {
     <h1>Solo Play!</h1>
     <h2 id='score'>Score: {userScore}</h2>
     <h4 id='round'>Round {rounds} of 10</h4>
-    <button className='question-generator' onClick={startGame} aria-controls='question-card' aria-expanded={open}>Start Game</button>
+    {!gameOn ? <button className='question-generator' onClick={startGame} aria-controls='question-card' aria-expanded={open}>Start Game</button> : <button className='question-generator' onClick={() => {handleRandom()}}>Next Question</button>}
     {showAll ? <div className='questions-cont'>
       {questions.map((question)=> {
         return (
         <Fade in={open}>
-          <div className='question-card'key={question.id} transition={Fade}>
+          <div className='question-card' key={question.id} transition={Fade}>
             <h3>Category: {question.category}</h3>
             <h2>{question.question}</h2>
             <h5>Answer: {question.answer}</h5>
