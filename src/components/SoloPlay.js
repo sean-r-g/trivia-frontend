@@ -44,7 +44,7 @@ const SoloPlay = ({props, loggedIn, email}) => {
         setQuestions(response.data)
       })
     setUserAnswer('')
-    if (rounds == 1) {
+    if (rounds == 0) {
       alert(`Game Over! Final score: ${userScore}`)
       setRounds(10)
       setGameOn(false)
@@ -83,7 +83,7 @@ const SoloPlay = ({props, loggedIn, email}) => {
         setShowAnswer(true)
         setCheckedAnswer(false)
       }
-     if (rounds == 1) {
+     if (rounds == 0) {
       alert(`Game Over! Final score: ${userScore}`)
       setRounds(10)
       setGameOn(false)
@@ -132,7 +132,7 @@ const SoloPlay = ({props, loggedIn, email}) => {
       })}
     </div> : null : null}
     {!gameOn ? <button className='question-generator' onClick={() => {startGame()}} aria-controls='question-card' aria-expanded={open}>Start Game</button> : <button className='question-generator' onClick={() => {handleRandom(); setRounds(rounds - 1)}}>Next Question</button>}
-    {loggedIn ? <button onClick={handleSaveScore} >Save Score</button> : null}
+    {/* {loggedIn ? <button onClick={handleSaveScore} >Save Score</button> : null} */}
     </div>
   );
 }
