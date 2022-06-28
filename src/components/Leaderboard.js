@@ -9,6 +9,7 @@ const Leaderboard = ({showLb, setShowLb, handleCloseLb, handleShowLb}) => {
 
     const getLeaderboard = () => {
         axios.get('http://localhost:3000/leaderboard').then((response)=>{
+        // axios.get('https://trivializer-backend.herokuapp.com/leaderboard').then((response)=>{
             setLeaderboard(response.data)
         })
     }

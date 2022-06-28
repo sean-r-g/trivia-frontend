@@ -19,6 +19,7 @@ const SoloPlay = ({props, loggedIn, email}) => {
   const [showForm, setShowForm] = useState(false)
 
   const currentUrl = 'http://localhost:3000/trivia/'
+  // const currentUrl = 'https://trivializer-backend.herokuapp.com/trivia/'
   
 
   let randomid = null
@@ -107,6 +108,8 @@ const SoloPlay = ({props, loggedIn, email}) => {
     email = userEmail
     axios.put(`http://localhost:3000/users/update`, {email, score})
     axios.post(`http://localhost:3000/leaderboard`, {email, score})
+    // axios.put(`https://trivializer-backend.herokuapp.com/users/update`, {email, score})
+    // axios.post(`https://trivializer-backend.herokuapp.com/leaderboard`, {email, score})
   }
 
 
