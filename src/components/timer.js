@@ -1,29 +1,20 @@
-import {useEffect, useState} from 'react'
+import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 
-const Timer = (props) => {
-    const [seconds, setSeconds] = useState()
 
-    const handleReset = () => {
-        setSeconds(20)
-    }
-
-    useEffect(()=> {
-        let myInterval = setInterval(()=> {
-        if (seconds > 0) {
-                setSeconds(seconds - 1)
-        } else if (seconds == 0) {
-            setSeconds(0)
-            }
-        }, 1000)
-    })
-
+const Timer = ({key, handleTimerDone}) => {
     return (
-        <div>
-            {seconds == 0 ? null : <h1>{seconds}</h1>}
-            <button onClick={handleReset}>Reset</button>
-        </div>
-    )
-
+    <CountdownCircleTimer
+        key={key}
+        isPlaying
+        duration={25}
+        size={70}
+        colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+        colorsTime={[20, 15, 10, 5]}
+        onComplete={handleTimerDone}
+        >
+        {({ remainingTime }) => remainingTime}
+    </CountdownCircleTimer>
+)
 }
 
 export default Timer
