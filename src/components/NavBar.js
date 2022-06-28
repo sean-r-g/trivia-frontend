@@ -15,7 +15,8 @@ const TopNavBar = ({email, loggedIn, handleShow, handleShowScores}) => {
             <Nav className="me-auto">
             <Nav.Link>Solo Play</Nav.Link>
             <Nav.Link>Ranked Play</Nav.Link>
-            <Nav.Link onClick={handleShowScores}>My Scores</Nav.Link>
+            <Nav.Link>Leaderboard</Nav.Link>
+            {loggedIn ? <Nav.Link onClick={handleShowScores}>My Scores</Nav.Link> : null}
             {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item>Action</NavDropdown.Item>
                 <NavDropdown.Item>Another action</NavDropdown.Item>

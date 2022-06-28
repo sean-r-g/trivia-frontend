@@ -14,7 +14,7 @@ const SoloPlay = ({props, loggedIn, email}) => {
   const [key, setKey] = useState(0)
   const [showTimer, setShowTimer] = useState(false)
   const [open, setOpen] = useState(false)
-  const [rounds, setRounds ] = useState(10)
+  const [rounds, setRounds ] = useState(1)
   const [gameOn, setGameOn] = useState(false)
   const [showForm, setShowForm] = useState(false)
 
@@ -44,18 +44,21 @@ const SoloPlay = ({props, loggedIn, email}) => {
         setQuestions(response.data)
       })
     setUserAnswer('')
-    if (rounds == 0) {
+    if (rounds == 10) {
       alert(`Game Over! Final score: ${userScore}`)
-      setRounds(10)
+      setRounds(1)
       setGameOn(false)
       setShowTimer(false)
+      if (loggedIn == true) {
+        handleSaveScore()
+      }
     }
   }
   
   const startGame = () => {
     setGameOn(true)
     setUserScore(0)
-    setRounds(10)
+    setRounds(1)
     handleRandom()
     setShowAll(true)
     setOpen(true)
@@ -64,10 +67,13 @@ const SoloPlay = ({props, loggedIn, email}) => {
   const handleTimerDone = () => {
     setShowAnswer(true)
     setShowTimer(false)
-    if (rounds == 1) {
+    if (rounds == 10) {
       alert(`Game Over! Final score: ${userScore}`)
-      setRounds(10)
+      setRounds(1)
       setGameOn(false)
+      if (loggedIn == true) {
+        handleSaveScore()
+      }
   }
 }
 
@@ -83,9 +89,9 @@ const SoloPlay = ({props, loggedIn, email}) => {
         setShowAnswer(true)
         setCheckedAnswer(false)
       }
-     if (rounds == 0) {
+     if (rounds == 10) {
       alert(`Game Over! Final score: ${userScore}`)
-      setRounds(10)
+      setRounds(1)
       setGameOn(false)
       if (loggedIn == true) {
         handleSaveScore()
@@ -100,6 +106,7 @@ const SoloPlay = ({props, loggedIn, email}) => {
     score = userScore
     email = userEmail
     axios.put(`http://localhost:3000/users/update`, {email, score})
+    axios.post(`http://localhost:3000/leaderboard`, {email, score})
   }
 
 
@@ -131,7 +138,7 @@ const SoloPlay = ({props, loggedIn, email}) => {
         )
       })}
     </div> : null : null}
-    {!gameOn ? <button className='question-generator' onClick={() => {startGame()}} aria-controls='question-card' aria-expanded={open}>Start Game</button> : <button className='question-generator' onClick={() => {handleRandom(); setRounds(rounds - 1)}}>Next Question</button>}
+    {!gameOn ? <button className='question-generator' onClick={() => {startGame()}} aria-controls='question-card' aria-expanded={open}>Start Game</button> : <button className='question-generator' onClick={() => {handleRandom(); setRounds(rounds + 1)}}>Next Question</button>}
     {/* {loggedIn ? <button onClick={handleSaveScore} >Save Score</button> : null} */}
     </div>
   );
