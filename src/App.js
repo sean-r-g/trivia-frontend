@@ -39,15 +39,23 @@ function App() {
 
   return (
     <>
-    <TopNavBar email={email} loggedIn={loggedIn} setEmail={setEmail} setUser={setUser} user={user} handleShow={handleShow} handleShowScores={handleShowScores} handleShowLb={handleShowLb} handleShowHome={handleShowHome} handleShowSolo={handleShowSolo}/>
-    <div id='hidelogin'>
-    <Login user={user} setUser={setUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail} handleShow={handleShow} handleClose={handleClose} show={show} setShow={setShow}/>
-    </div>
-    {showHome ? <Home/> : null}
-    {showSolo ? <SoloPlay user={user} loggedIn={loggedIn} email={email}/> : null}
-    <UserScores user={user} loggedIn={loggedIn} handleShowScores={handleShowScores} handleCloseScores={handleCloseScores} showScores={showScores} setShowScores={setShowScores}
-    />
-    <Leaderboard handleCloseLb={handleCloseLb} handleShowLb={handleShowLb} showLb={showLb} setShowLb={setShowLb}/>
+      <head>
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+        </style>
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+        </style>
+      </head>
+      <TopNavBar email={email} loggedIn={loggedIn} setEmail={setEmail} setUser={setUser} user={user} handleShow={handleShow} handleShowScores={handleShowScores} handleShowLb={handleShowLb} handleShowHome={handleShowHome} handleShowSolo={handleShowSolo}/>
+      <div id='hidelogin'>
+      <Login user={user} setUser={setUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail} handleShow={handleShow} handleClose={handleClose} show={show} setShow={setShow}/>
+      </div>
+      {showHome ? <Home handleShowSolo={handleShowSolo} handleShowLb={handleShowLb}/> : null}
+      {showSolo ? <SoloPlay user={user} loggedIn={loggedIn} email={email}/> : null}
+      <UserScores user={user} loggedIn={loggedIn} handleShowScores={handleShowScores} handleCloseScores={handleCloseScores} showScores={showScores} setShowScores={setShowScores}
+      />
+      <Leaderboard handleCloseLb={handleCloseLb} handleShowLb={handleShowLb} showLb={showLb} setShowLb={setShowLb}/>
     </>
   );
 }

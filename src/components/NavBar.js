@@ -9,7 +9,7 @@ const TopNavBar = ({email, loggedIn, handleShow, handleShowScores, handleShowLb,
     return (
         <Navbar id='navbar'fixed='top' collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-        <Navbar.Brand onClick={handleShowHome}><img id='logo' src='https://i.imgur.com/OCNCN6R.png'/></Navbar.Brand>
+        <Navbar.Brand onClick={handleShowHome}><img id='logo' src='https://i.imgur.com/XsGT1Nq.png'/></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
