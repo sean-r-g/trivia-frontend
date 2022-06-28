@@ -11,7 +11,8 @@ const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail, show, set
 
 
     const getUsers = () => {
-        axios.get('http://localhost:3000/users').then((response)=>{
+        // axios.get('http://localhost:3000/users').then((response)=>{
+        axios.get('https://trivializer-backend.herokuapp.com/users').then((response)=>{
             setUser(response.data)
         })
     }
