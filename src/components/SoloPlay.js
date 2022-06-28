@@ -18,8 +18,8 @@ const SoloPlay = ({props, loggedIn, email}) => {
   const [gameOn, setGameOn] = useState(false)
   const [showForm, setShowForm] = useState(false)
 
-  // const currentUrl = 'http://localhost:3000/trivia/'
-  const currentUrl = 'https://trivializer-backend.herokuapp.com/trivia/'
+  const currentUrl = 'http://localhost:3000/trivia/'
+  // const currentUrl = 'https://trivializer-backend.herokuapp.com/trivia/'
   
 
   let randomid = null
@@ -106,19 +106,21 @@ const SoloPlay = ({props, loggedIn, email}) => {
   const handleSaveScore = (email, score) => {
     score = userScore
     email = userEmail
-    // axios.put(`http://localhost:3000/users/update`, {email, score})
-    // axios.post(`http://localhost:3000/leaderboard`, {email, score})
-    axios.put(`https://trivializer-backend.herokuapp.com/users/update`, {email, score})
-    axios.post(`https://trivializer-backend.herokuapp.com/leaderboard`, {email, score})
+    axios.put(`http://localhost:3000/users/update`, {email, score})
+    axios.post(`http://localhost:3000/leaderboard`, {email, score})
+    // axios.put(`https://trivializer-backend.herokuapp.com/users/update`, {email, score})
+    // axios.post(`https://trivializer-backend.herokuapp.com/leaderboard`, {email, score})
   }
 
 
 
   return (
     <div className='main-div'>
-    <h1>Solo Play!</h1>
-    <h2 id='score'>Score: {userScore}</h2>
-    <h4 id='round'>Round {rounds} of 10</h4>
+    <div className='round-info'> 
+      <h1>Solo Play!</h1>
+      <h2 id='score'>Score: {userScore}</h2>
+      <h3 id='round'>Round {rounds} of 10</h3>
+    </div>
     {showTimer ? <div id='timer-div'><Timer handleTimerDone={handleTimerDone}/></div> : null}
     {gameOn ? showAll ? <div className='questions-cont'>
       {questions.map((question)=> {

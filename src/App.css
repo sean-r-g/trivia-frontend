@@ -1,8 +1,16 @@
 body {
   padding: 5px;
+  background-image: linear-gradient(to top,gray, white);
+  background-repeat: no-repeat;
+  background-color: black;
+  background-size: cover;
+  height: 100%;
+  background-attachment: fixed;
+  font-family: 'Kalam', cursive;
 }
 #logo {
   width: 120px;
+  border-radius: 10px;
 }
 #logo:hover {
   cursor: pointer;
@@ -11,8 +19,37 @@ h1 {
   text-align: center;
 }
 .intro-div {
-  margin-top: 100px;
+  animation: fadein 3s;
+  margin-top: 120px;
   text-align: center;
+  font-family: 'Kalam', cursive;
+}
+.intro-div h1 {
+  font-size: 60px;
+  font-family: 'Fredericka the Great', cursive;
+}
+.intro-btns {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  font-family: 'Kalam', cursive;
+}
+.intro-btns button{
+  margin-top: 70px;
+  margin-left: 40px;
+  margin-right: 40px;
+  background-color: rgb(55, 53, 53);
+  color: white;
+  border-radius: 5px;
+  font-size: 28px;
+}
+#indev {
+  /* display: none; */
+  font-size: 14px;
+}
+#mp-btn {
+  opacity: .55;
 }
 #score, #round {
   text-align: center;
@@ -23,25 +60,56 @@ h1 {
   align-content: center;
 }
 .question-card {
-  border: 1px solid blue;
+  animation: fadein 1.5s;
+  /* border: 1px solid blue; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 15px;
-  height: 250px;
+  height: 350px;
 }
 .question-generator {
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 25px;
+  border-radius: 5px;
+  background-color: rgb(55, 53, 53);
+  color: white;
+  font-size: 32px;
 }
 #hidelogin {
   display: none;
 }
 .main-div {
+  display: flex;
+  flex-direction: column;
   margin-top: 80px;
+  font-family: 'Kalam', cursive;
+  animation: fadein 2s;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.main-div h1 {
+  font-size: 50px;
+}
+.main-div h2 {
+  margin-top: 50px;
+  font-size: 45px;
+}
+.main-div h3 {
+  font-size: 36px;
+}
+.round-info{
+  border-radius: 45px;
+  padding: 20px;
+  background-color: rgb(55, 53, 53);
+  color: white;
+  width: 450px;
+  font-family: 'Fredericka the Great', cursive;
 }
 .user-scores {
   text-align: center;
@@ -54,4 +122,8 @@ h1 {
 .user-scores li {
   list-style-type: none;
   font-size: 20px;
+}
+@keyframes fadein {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
