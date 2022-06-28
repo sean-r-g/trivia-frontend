@@ -25,10 +25,10 @@ const Leaderboard = ({showLb, setShowLb, handleCloseLb, handleShowLb}) => {
             <Modal.Title id='modaltitle'>Trivializer Leaderboard</Modal.Title>
             </Modal.Header>
             <Modal.Body id='modalbody'>
-                <ol>
+                <ol type='1'>
                     {leaderboard.map((leader)=>{
                         return (
-                            <li>User: {leader.email.slice(0,3)}****.com - Score: {leader.score}</li>
+                            <li>{leader.email.slice(0,3)}****.com - Score: {leader.score}</li>
                         )
                     })}
                 </ol>

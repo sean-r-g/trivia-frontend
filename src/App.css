@@ -4,7 +4,14 @@ body {
 #logo {
   width: 120px;
 }
+#logo:hover {
+  cursor: pointer;
+}
 h1 {
+  text-align: center;
+}
+.intro-div {
+  margin-top: 100px;
   text-align: center;
 }
 #score, #round {

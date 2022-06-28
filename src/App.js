@@ -7,6 +7,7 @@ import Login from './components/Login';
 import UserScores from './components/UserScores'
 import authServices from './components/authservices';
 import Leaderboard from './components/Leaderboard';
+import Home from './components/Home';
 
 
 
@@ -17,6 +18,8 @@ function App() {
   const [show, setShow] = useState(false);
   const [showScores, setShowScores] = useState(false)
   const [showLb, setShowLb] = useState(false)
+  const [showSolo, setShowSolo] = useState(false)
+  const [showHome, setShowHome] = useState(true)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleCloseScores = () => setShowScores(false);
@@ -24,13 +27,24 @@ function App() {
   const handleCloseLb = () => setShowLb(false);
   const handleShowLb = () => setShowLb(true);
 
+  const handleShowSolo = () => {
+    setShowHome(false)
+    setShowSolo(true)
+  }
+
+  const handleShowHome = () => {
+    setShowHome(true)
+    setShowSolo(false)
+  }
+
   return (
     <>
-    <TopNavBar email={email} loggedIn={loggedIn} setEmail={setEmail} setUser={setUser} user={user} handleShow={handleShow} handleShowScores={handleShowScores} handleShowLb={handleShowLb}/>
+    <TopNavBar email={email} loggedIn={loggedIn} setEmail={setEmail} setUser={setUser} user={user} handleShow={handleShow} handleShowScores={handleShowScores} handleShowLb={handleShowLb} handleShowHome={handleShowHome} handleShowSolo={handleShowSolo}/>
     <div id='hidelogin'>
     <Login user={user} setUser={setUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} email={email} setEmail={setEmail} handleShow={handleShow} handleClose={handleClose} show={show} setShow={setShow}/>
     </div>
-    <SoloPlay user={user} loggedIn={loggedIn} email={email}/>
+    {showHome ? <Home/> : null}
+    {showSolo ? <SoloPlay user={user} loggedIn={loggedIn} email={email}/> : null}
     <UserScores user={user} loggedIn={loggedIn} handleShowScores={handleShowScores} handleCloseScores={handleCloseScores} showScores={showScores} setShowScores={setShowScores}
     />
     <Leaderboard handleCloseLb={handleCloseLb} handleShowLb={handleShowLb} showLb={showLb} setShowLb={setShowLb}/>
