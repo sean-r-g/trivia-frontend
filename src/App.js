@@ -14,7 +14,7 @@ import Home from './components/Home';
 function App() {
   const [user, setUser] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState()
   const [show, setShow] = useState(false);
   const [showScores, setShowScores] = useState(false)
   const [showLb, setShowLb] = useState(false)
