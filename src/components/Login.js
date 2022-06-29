@@ -36,6 +36,7 @@ const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail, show, set
             localStorage.setItem('email', email)
         } catch (err) {
             console.log(err);
+            alert('Invalid Username or Password')
         }
     }
     const handleSignup = async (e) => {
@@ -46,6 +47,7 @@ const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail, show, set
                 setSignedUp(true)
             })
         } catch (err) {
+            alert('Username already taken or not a valid email address')
             console.log(err);
         }
     }
