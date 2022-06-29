@@ -7,18 +7,20 @@ const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail, show, set
     const [password, setPassword] = useState('')
     const [showLogin, setShowLogin] = useState(true)
     const [signedUp, setSignedUp] = useState(false)
+    const [checkEmail, setCheckEmail] =useState(false)
 
 
 
     const getUsers = () => {
-        // axios.get('http://localhost:3000/users').then((response)=>{
-        axios.get('https://trivializer-backend.herokuapp.com/users').then((response)=>{
+        axios.get('http://localhost:3000/users').then((response)=>{
+        // axios.get('https://trivializer-backend.herokuapp.com/users').then((response)=>{
             setUser(response.data)
         })
     }
     useEffect(()=> {
         getUsers()
     }, [])
+
     const handleSetUser = () => {
         setUser(user.filter(user => user.email == email))
     }
@@ -31,8 +33,10 @@ const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail, show, set
             setSignedUp(false)
             handleSetUser()
             console.log('Successfully logged in');
+            localStorage.setItem('email', email)
         } catch (err) {
             console.log(err);
+            alert('Invalid Username or Password')
         }
     }
     const handleSignup = async (e) => {
@@ -43,20 +47,36 @@ const Login = ({user, setUser, loggedIn, setLoggedIn, email, setEmail, show, set
                 setSignedUp(true)
             })
         } catch (err) {
+            alert('Username already taken or not a valid email address')
             console.log(err);
         }
     }
     const handleLogout = () => {
         localStorage.removeItem('user')
-        localStorage.removeItem('userscore')
         setLoggedIn(false)
         setEmail('')
         setPassword('')
+        localStorage.removeItem('email')
     }
     const toggleLoginSignup = () => {
     showLogin ?  setShowLogin(false) : setShowLogin(true)
     }
 
+    useEffect(()=>{
+        if (localStorage.getItem('email')) {
+            setEmail(localStorage.getItem('email'))
+            setCheckEmail(true)
+        }
+    }, [])
+
+    useEffect(() =>{
+        if (email !== undefined && email !== '') {
+            authServices.login(email, password)
+            setLoggedIn(true)
+            setSignedUp(false)
+            handleSetUser()
+        }
+    }, [checkEmail])
 
       
     return (
