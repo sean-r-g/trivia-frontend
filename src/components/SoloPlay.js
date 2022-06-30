@@ -121,7 +121,7 @@ const SoloPlay = ({props, loggedIn, email}) => {
       <h2 id='score'>Score: {userScore}</h2>
       <h3 id='round'>Round {rounds} of 10</h3>
     </div>
-    {showTimer ? <div id='timer-div'><Timer handleTimerDone={handleTimerDone}/></div> : null}
+    {showTimer ? <div id='timer-div'><Timer handleTimerDone={handleTimerDone} key={key}/></div> : null}
     {gameOn ? showAll ? <div className='questions-cont'>
       {questions.map((question)=> {
         return (
@@ -137,7 +137,7 @@ const SoloPlay = ({props, loggedIn, email}) => {
                 <input type='submit' value='Submit'/>
               </label>
             </form> : <h4>Your answer: {userAnswer}</h4>}
-            {showAnswer ? checkedAnswer ? <h1>Correct!</h1> : <h1>*Bzzzzzzz* The correct answer is {question.answer}</h1> : null}
+            {showAnswer ? checkedAnswer ? <h1 id='correct'>Correct!</h1> : <h1 id='wrong'>*Bzzzzzzz* Correct Answer: <span id='answer'>{question.answer}</span></h1> : null}
           </div>
           </Fade>
         )

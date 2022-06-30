@@ -58,6 +58,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-content: center;
+  margin-bottom: 20px;
 }
 .question-card {
   animation: fadein 1.5s;
@@ -68,6 +69,14 @@ h1 {
   align-items: center;
   padding: 15px;
   height: 350px;
+}
+.question-card h2 {
+  margin-left: 55px;
+  margin-right: 55px;
+  font-size: 30px;
+}
+.question-card h3 {
+  text-decoration: underline;
 }
 .question-generator {
   display: block;
@@ -96,12 +105,12 @@ h1 {
 .main-div h1 {
   font-size: 50px;
 }
-.main-div h2 {
-  margin-top: 50px;
-  font-size: 45px;
+.round-info h2 {
+  margin-top: 20px;
+  font-size: 35px;
 }
 .main-div h3 {
-  font-size: 36px;
+  font-size: 30px;
 }
 .round-info{
   border-radius: 45px;
@@ -110,6 +119,24 @@ h1 {
   color: white;
   width: 450px;
   font-family: 'Fredericka the Great', cursive;
+  margin-bottom: 20px;
+}
+#wrong {
+  color: red;
+  background-color: lightcoral;
+  padding: 5px;
+  border-radius: 25px;
+}
+#answer {
+  text-decoration: underline;
+  font-weight: bold;
+  color: black;
+}
+#correct {
+  color: green;
+  background-color: lightgreen;
+  padding: 5px;
+  border-radius: 25px;
 }
 .user-scores {
   text-align: center;
@@ -126,4 +153,38 @@ h1 {
 @keyframes fadein {
   from {opacity: 0;}
   to {opacity: 1;}
+}
+
+
+@media only screen and (max-width: 750px) {
+  .question-card {
+    height: 250px;
+  }
+  .question-card h2 {
+    font-size: 24px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .question-card h3 {
+    font-size: 20px;
+  }
+  .question-card h1{
+    font-size: 26px;
+  }
+  #timer-div {
+    margin-bottom: 0px;
+  }
+  .question-generator {
+    font-size: 20px;
+  }
+  .round-info h1{
+    font-size: 28px;
+  }
+  .round-info h2 {
+    font-size: 24px;
+  }
+  .round-info h3{
+    font-size: 20px;
+  }
+
 }

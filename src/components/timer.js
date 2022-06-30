@@ -8,8 +8,8 @@ const Timer = ({key, handleTimerDone}) => {
         isPlaying
         duration={25}
         size={70}
-        colors={['#004777', '#F7B801', '#A30000', '#A30000']}
-        colorsTime={[20, 15, 10, 5]}
+        colors={['#004777', '#F7B801', '#c95f22', '#A30000']}
+        colorsTime={[15, 10, 5, 0]}
         onComplete={handleTimerDone}
         >
         {({ remainingTime }) => remainingTime}
