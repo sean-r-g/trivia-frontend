@@ -18,8 +18,8 @@ const SoloPlay = ({props, loggedIn, email}) => {
   const [gameOn, setGameOn] = useState(false)
   const [showForm, setShowForm] = useState(false)
 
-  const currentUrl = 'http://localhost:3000/trivia/'
-  // const currentUrl = 'https://trivializer-backend.herokuapp.com/trivia/'
+  // const currentUrl = 'http://localhost:3000/trivia/'
+  const currentUrl = 'https://trivializer-backend.herokuapp.com/trivia/'
   
 
   let randomid = null
@@ -106,10 +106,10 @@ const SoloPlay = ({props, loggedIn, email}) => {
   const handleSaveScore = (email, score) => {
     score = userScore
     email = userEmail
-    axios.put(`http://localhost:3000/users/update`, {email, score})
-    axios.post(`http://localhost:3000/leaderboard`, {email, score})
-    // axios.put(`https://trivializer-backend.herokuapp.com/users/update`, {email, score})
-    // axios.post(`https://trivializer-backend.herokuapp.com/leaderboard`, {email, score})
+    // axios.put(`http://localhost:3000/users/update`, {email, score})
+    // axios.post(`http://localhost:3000/leaderboard`, {email, score})
+    axios.put(`https://trivializer-backend.herokuapp.com/users/update`, {email, score})
+    axios.post(`https://trivializer-backend.herokuapp.com/leaderboard`, {email, score})
   }
 
 
@@ -144,7 +144,6 @@ const SoloPlay = ({props, loggedIn, email}) => {
       })}
     </div> : null : null}
     {!gameOn ? <button className='question-generator' onClick={() => {startGame()}} aria-controls='question-card' aria-expanded={open}>Start Game</button> : <button className='question-generator' onClick={() => {handleRandom(); setRounds(rounds + 1)}}>Next Question</button>}
-    {/* {loggedIn ? <button onClick={handleSaveScore} >Save Score</button> : null} */}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-    const currentURL = 'http://localhost:3000/users'
-    // const currentURL = 'https://trivializer-backend.herokuapp.com/trivia/'
+    // const currentURL = 'http://localhost:3000/users'
+    const currentURL = 'https://trivializer-backend.herokuapp.com/trivia/'
 
     const signup = (email, password) => {
         return axios.post(`${currentURL}/signup`, {email, password})
