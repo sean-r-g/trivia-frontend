@@ -129,7 +129,7 @@ const SoloPlay = ({props, loggedIn, email}) => {
           <div className='question-card' key={question.id} transition={Fade}>
             <h3>Category: {question.category}</h3>
             <h2>{question.question}</h2>
-            <h5>Answer: {question.answer}</h5>
+            {/* <h5>Answer: {question.answer}</h5> */}
             <img src={question.image}/>
             {showForm ? <form onSubmit={(event) => {checkAnswer(event, question)}}>
               <label> Answer: 
