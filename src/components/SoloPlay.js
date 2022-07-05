@@ -3,6 +3,8 @@ import React, {useState, useEffect, useRef} from 'react'
 import Fade from 'react-bootstrap/Fade'
 import Timer from './timer'
 
+////Questions source: The Dozen Trivia Competition, Jeff D. Lowe
+
 
 const SoloPlay = ({props, loggedIn, email}) => {
   const [questions, setQuestions] = useState([])
